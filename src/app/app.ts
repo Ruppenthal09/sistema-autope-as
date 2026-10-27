@@ -8,7 +8,13 @@ interface Produto {
   preco: number;
   estoque: number;
 }
-
+interface Venda {
+  codigoProduto: string;
+  descricaoProduto: string;
+  quantidade: number;
+  valorTotal: number;
+  data: Date;
+}
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,11 +27,18 @@ export class App {
 
   produtos: Produto[] = [];
 
+  vendas: Venda[] = [];
+
+
+  codigoVenda = '';
+  quantidadeVenda = 1;
+
   novoProduto: Produto = {
     codigo: '',
     descricao: '',
     preco: 0,
     estoque: 0
+  
   };
 
   mensagem = '';
@@ -104,5 +117,40 @@ export class App {
     produto.estoque -= quantidade;
     this.mensagem = 'Retirada registrada com sucesso!';
   }
+  registrarVenda() {
+  const produto = this.produtos.find(
+    p => p.codigo === this.codigoVenda
+  );
+
+  if (!produto) {
+    this.mensagem = 'Selecione um produto válido.';
+    return;
+  }
+
+  if (!Number.isInteger(this.quantidadeVenda) || this.quantidadeVenda <= 0) {
+    this.mensagem = 'Informe uma quantidade inteira maior que zero.';
+    return;
+  }
+
+  if (this.quantidadeVenda > produto.estoque) {
+    this.mensagem = 'Estoque insuficiente para realizar a venda.';
+    return;
+  }
+
+  const venda: Venda = {
+    codigoProduto: produto.codigo,
+    descricaoProduto: produto.descricao,
+    quantidade: this.quantidadeVenda,
+    valorTotal: produto.preco * this.quantidadeVenda,
+    data: new Date()
+  };
+
+  produto.estoque -= this.quantidadeVenda;
+  this.vendas.push(venda);
+
+  this.codigoVenda = '';
+  this.quantidadeVenda = 1;
+  this.mensagem = 'Venda registrada com sucesso!';
+}
 }
 
