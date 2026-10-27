@@ -1,59 +1,36 @@
-# SistemaAutopecas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.41.
+# Sistema de Controle de Estoque e Vendas para Autopeças
 
-## Development server
+Projeto MVP desenvolvido com Angular e TypeScript para auxiliar no cadastro de produtos e no controle de estoque e vendas de uma loja de autopeças.
 
-To start a local development server, run:
+## Tecnologias
 
-```bash
-ng serve
-```
+- Angular 20
+- TypeScript
+- HTML
+- CSS
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Funcionalidades implementadas
 
-## Code scaffolding
+- Página inicial com navegação
+- Cadastro de produtos
+- Validação dos dados cadastrados
+- Listagem dos produtos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Funcionalidades planejadas
 
-```bash
-ng generate component component-name
-```
+- Controle de estoque
+- Registro de vendas
+- Persistência local com IndexedDB
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Como executar
 
-```bash
-ng generate --help
-```
+1. Instale o Node.js.
+2. Abra a pasta do projeto no terminal.
+3. Execute `npm install`.
+4. Execute `npm start`.
+5. Acesse http://localhost:4200/.
 
-## Building
+## Objetivo acadêmico
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MVP desenvolvido como parte de uma atividade acadêmica, com versionamento de código no GitHub.
