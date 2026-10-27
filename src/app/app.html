@@ -20,8 +20,10 @@
 
       <div class="card">
         <h3>📊 Estoque</h3>
-        <p>Consulte as quantidades disponíveis.</p>
-        <button disabled>Em desenvolvimento</button>
+        <p>Consulte e atualize as quantidades disponíveis.</p>
+        <button (click)="abrirTela('estoque')">
+          Acessar Estoque
+        </button>
       </div>
 
       <div class="card">
@@ -91,6 +93,71 @@
           } @empty {
             <tr>
               <td colspan="4">Nenhum produto cadastrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <button class="voltar" (click)="abrirTela('inicio')">
+      Voltar ao painel
+    </button>
+  }
+
+  @if (tela === 'estoque') {
+    <h2>Controle de Estoque</h2>
+    <p>Adicione ou retire unidades dos produtos cadastrados.</p>
+
+    @if (mensagem) {
+      <p role="status">{{ mensagem }}</p>
+    }
+
+    <div class="tabela-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Produto</th>
+            <th>Estoque atual</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (produto of produtos; track produto.codigo) {
+            <tr>
+              <td>{{ produto.codigo }}</td>
+              <td>{{ produto.descricao }}</td>
+              <td>{{ produto.estoque }}</td>
+              <td>
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  #quantidade
+                  placeholder="Qtd."
+                  aria-label="Quantidade para movimentar"
+                />
+              </td>
+              <td>
+                <button
+                  type="button"
+                  (click)="adicionarEstoque(produto.codigo, +quantidade.value)">
+                  Adicionar
+                </button>
+
+                <button
+                  type="button"
+                  (click)="retirarEstoque(produto.codigo, +quantidade.value)">
+                  Retirar
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5">
+                Nenhum produto cadastrado. Cadastre um produto primeiro.
+              </td>
             </tr>
           }
         </tbody>

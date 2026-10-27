@@ -65,4 +65,44 @@ export class App {
 
     this.mensagem = 'Produto cadastrado com sucesso!';
   }
+
+  adicionarEstoque(codigo: string, quantidade: number) {
+    const produto = this.produtos.find(p => p.codigo === codigo);
+
+    if (!produto) {
+      this.mensagem = 'Produto não encontrado.';
+      return;
+    }
+
+    if (!Number.isInteger(quantidade) || quantidade <= 0) {
+      this.mensagem = 'Informe uma quantidade inteira maior que zero.';
+      return;
+    }
+
+    produto.estoque += quantidade;
+    this.mensagem = 'Estoque atualizado com sucesso!';
+  }
+
+  retirarEstoque(codigo: string, quantidade: number) {
+    const produto = this.produtos.find(p => p.codigo === codigo);
+
+    if (!produto) {
+      this.mensagem = 'Produto não encontrado.';
+      return;
+    }
+
+    if (!Number.isInteger(quantidade) || quantidade <= 0) {
+      this.mensagem = 'Informe uma quantidade inteira maior que zero.';
+      return;
+    }
+
+    if (quantidade > produto.estoque) {
+      this.mensagem = 'Estoque insuficiente para esta retirada.';
+      return;
+    }
+
+    produto.estoque -= quantidade;
+    this.mensagem = 'Retirada registrada com sucesso!';
+  }
 }
+
