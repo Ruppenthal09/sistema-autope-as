@@ -105,10 +105,22 @@ export class App implements OnInit {
       return;
     }
 
-    if (this.produtos.some(p => p.codigo === produto.codigo)) {
-      this.mensagem = 'Já existe um produto com esse código.';
-      return;
-    }
+    
+    const codigoNormalizado = produto.codigo.trim().toUpperCase();
+
+    if (
+     this.produtos.some(
+      p => p.codigo.trim().toUpperCase() === codigoNormalizado
+  )
+) 
+{
+  this.mensagem = 'Já existe um produto com esse código.';
+  return;
+}
+
+produto.codigo = codigoNormalizado;
+produto.descricao = produto.descricao.trim();
+
 
     this.produtos.push({ ...produto });
 
